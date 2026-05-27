@@ -1,0 +1,151 @@
+{
+  "document_type": "employment_form",
+  "sample_index": 3,
+  "description": "Simulated employment form #3 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Employee Name",
+      "value": "Michael Chen",
+      "bounding_box": {
+        "x": 0.05753,
+        "y": 0.07629,
+        "width": 0.35,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9521
+    },
+    {
+      "field_name": "Date of Birth",
+      "value": "1988-11-03",
+      "bounding_box": {
+        "x": 0.04791,
+        "y": 0.14829,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9305
+    },
+    {
+      "field_name": "SSN",
+      "value": "***-**-9012",
+      "bounding_box": {
+        "x": 0.0453,
+        "y": 0.19493,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9418
+    },
+    {
+      "field_name": "Address",
+      "value": "789 Pine Rd",
+      "bounding_box": {
+        "x": 0.04525,
+        "y": 0.26169,
+        "width": 0.45,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9788
+    },
+    {
+      "field_name": "City",
+      "value": "San Francisco",
+      "bounding_box": {
+        "x": 0.04799,
+        "y": 0.31439,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9897
+    },
+    {
+      "field_name": "State",
+      "value": "CA",
+      "bounding_box": {
+        "x": 0.30019,
+        "y": 0.31182,
+        "width": 0.1,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8852
+    },
+    {
+      "field_name": "Zip Code",
+      "value": "94102",
+      "bounding_box": {
+        "x": 0.44219,
+        "y": 0.32255,
+        "width": 0.12,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9671
+    },
+    {
+      "field_name": "Phone Number",
+      "value": "(415) 555-0267",
+      "bounding_box": {
+        "x": 0.04844,
+        "y": 0.37127,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.922
+    },
+    {
+      "field_name": "Email",
+      "value": "mchen@example.com",
+      "bounding_box": {
+        "x": 0.05992,
+        "y": 0.44058,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9868
+    },
+    {
+      "field_name": "Position Applied For",
+      "value": "Product Manager",
+      "bounding_box": {
+        "x": 0.05722,
+        "y": 0.49023,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9593
+    },
+    {
+      "field_name": "Start Date",
+      "value": "2024-01-15",
+      "bounding_box": {
+        "x": 0.05363,
+        "y": 0.56074,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9094
+    },
+    {
+      "field_name": "Salary Expected",
+      "value": "$140,000",
+      "bounding_box": {
+        "x": 0.30282,
+        "y": 0.55223,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9278
+    }
+  ]
+}

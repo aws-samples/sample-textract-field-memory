@@ -1,0 +1,151 @@
+{
+  "document_type": "employment_form",
+  "sample_index": 5,
+  "description": "Simulated employment form #5 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Employee Name",
+      "value": "Robert Wilson",
+      "bounding_box": {
+        "x": 0.04846,
+        "y": 0.07424,
+        "width": 0.35,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9393
+    },
+    {
+      "field_name": "Date of Birth",
+      "value": "1983-09-30",
+      "bounding_box": {
+        "x": 0.0546,
+        "y": 0.13402,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9143
+    },
+    {
+      "field_name": "SSN",
+      "value": "***-**-7890",
+      "bounding_box": {
+        "x": 0.0599,
+        "y": 0.203,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9282
+    },
+    {
+      "field_name": "Address",
+      "value": "654 Maple Dr",
+      "bounding_box": {
+        "x": 0.05035,
+        "y": 0.25242,
+        "width": 0.45,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9047
+    },
+    {
+      "field_name": "City",
+      "value": "Denver",
+      "bounding_box": {
+        "x": 0.04676,
+        "y": 0.32177,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9053
+    },
+    {
+      "field_name": "State",
+      "value": "CO",
+      "bounding_box": {
+        "x": 0.2944,
+        "y": 0.31142,
+        "width": 0.1,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9494
+    },
+    {
+      "field_name": "Zip Code",
+      "value": "80201",
+      "bounding_box": {
+        "x": 0.44458,
+        "y": 0.32811,
+        "width": 0.12,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9746
+    },
+    {
+      "field_name": "Phone Number",
+      "value": "(303) 555-0421",
+      "bounding_box": {
+        "x": 0.04142,
+        "y": 0.37476,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9536
+    },
+    {
+      "field_name": "Email",
+      "value": "rwilson@example.net",
+      "bounding_box": {
+        "x": 0.04428,
+        "y": 0.43265,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9829
+    },
+    {
+      "field_name": "Position Applied For",
+      "value": "DevOps Engineer",
+      "bounding_box": {
+        "x": 0.05142,
+        "y": 0.49945,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9663
+    },
+    {
+      "field_name": "Start Date",
+      "value": "2024-02-15",
+      "bounding_box": {
+        "x": 0.05615,
+        "y": 0.55381,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8907
+    },
+    {
+      "field_name": "Salary Expected",
+      "value": "$130,000",
+      "bounding_box": {
+        "x": 0.29862,
+        "y": 0.55847,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9314
+    }
+  ]
+}

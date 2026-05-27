@@ -1,0 +1,103 @@
+{
+  "document_type": "invoice",
+  "sample_index": 1,
+  "description": "Simulated invoice #1 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Invoice Number",
+      "value": "INV-2024-001",
+      "bounding_box": {
+        "x": 0.60458,
+        "y": 0.05347,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9883
+    },
+    {
+      "field_name": "Invoice Date",
+      "value": "2024-01-15",
+      "bounding_box": {
+        "x": 0.59197,
+        "y": 0.09805,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9173
+    },
+    {
+      "field_name": "Due Date",
+      "value": "2024-02-14",
+      "bounding_box": {
+        "x": 0.60723,
+        "y": 0.14497,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9009
+    },
+    {
+      "field_name": "Bill To",
+      "value": "Acme Corp, 100 Business Pkwy",
+      "bounding_box": {
+        "x": 0.04897,
+        "y": 0.19844,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9106
+    },
+    {
+      "field_name": "Ship To",
+      "value": "Acme Warehouse, 200 Industrial Ave",
+      "bounding_box": {
+        "x": 0.445,
+        "y": 0.20847,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9287
+    },
+    {
+      "field_name": "Subtotal",
+      "value": "$4,500.00",
+      "bounding_box": {
+        "x": 0.60723,
+        "y": 0.70101,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8856
+    },
+    {
+      "field_name": "Tax",
+      "value": "$382.50",
+      "bounding_box": {
+        "x": 0.60999,
+        "y": 0.75672,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9866
+    },
+    {
+      "field_name": "Total",
+      "value": "$4,882.50",
+      "bounding_box": {
+        "x": 0.60853,
+        "y": 0.80697,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8983
+    }
+  ]
+}

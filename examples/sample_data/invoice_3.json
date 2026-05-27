@@ -1,0 +1,103 @@
+{
+  "document_type": "invoice",
+  "sample_index": 3,
+  "description": "Simulated invoice #3 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Invoice Number",
+      "value": "INV-2024-003",
+      "bounding_box": {
+        "x": 0.59315,
+        "y": 0.05922,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8888
+    },
+    {
+      "field_name": "Invoice Date",
+      "value": "2024-02-01",
+      "bounding_box": {
+        "x": 0.59372,
+        "y": 0.1019,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9543
+    },
+    {
+      "field_name": "Due Date",
+      "value": "2024-03-02",
+      "bounding_box": {
+        "x": 0.5947,
+        "y": 0.1424,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9779
+    },
+    {
+      "field_name": "Bill To",
+      "value": "Global Logistics, 800 Port Rd",
+      "bounding_box": {
+        "x": 0.04492,
+        "y": 0.20189,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9481
+    },
+    {
+      "field_name": "Ship To",
+      "value": "GL Distribution Center, 900 Freight Ln",
+      "bounding_box": {
+        "x": 0.44838,
+        "y": 0.20167,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9375
+    },
+    {
+      "field_name": "Subtotal",
+      "value": "$8,200.00",
+      "bounding_box": {
+        "x": 0.60869,
+        "y": 0.69409,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9588
+    },
+    {
+      "field_name": "Tax",
+      "value": "$697.00",
+      "bounding_box": {
+        "x": 0.59477,
+        "y": 0.74792,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9539
+    },
+    {
+      "field_name": "Total",
+      "value": "$8,897.00",
+      "bounding_box": {
+        "x": 0.596,
+        "y": 0.79632,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9627
+    }
+  ]
+}

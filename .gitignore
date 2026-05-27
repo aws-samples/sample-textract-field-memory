@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.pytest_cache/
+.venv/
+venv/
+.kiro/
+.DS_Store
+dashboard/store_path/
+PCR.md
+.threatmodel/

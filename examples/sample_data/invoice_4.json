@@ -1,0 +1,103 @@
+{
+  "document_type": "invoice",
+  "sample_index": 4,
+  "description": "Simulated invoice #4 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Invoice Number",
+      "value": "INV-2024-004",
+      "bounding_box": {
+        "x": 0.59145,
+        "y": 0.04917,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9898
+    },
+    {
+      "field_name": "Invoice Date",
+      "value": "2024-02-10",
+      "bounding_box": {
+        "x": 0.60992,
+        "y": 0.09147,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9034
+    },
+    {
+      "field_name": "Due Date",
+      "value": "2024-03-11",
+      "bounding_box": {
+        "x": 0.5953,
+        "y": 0.15867,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9769
+    },
+    {
+      "field_name": "Bill To",
+      "value": "MedHealth Systems, 42 Wellness Way",
+      "bounding_box": {
+        "x": 0.05759,
+        "y": 0.19739,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8974
+    },
+    {
+      "field_name": "Ship To",
+      "value": "MedHealth Clinic, 44 Care St",
+      "bounding_box": {
+        "x": 0.45667,
+        "y": 0.20407,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9473
+    },
+    {
+      "field_name": "Subtotal",
+      "value": "$22,100.00",
+      "bounding_box": {
+        "x": 0.60974,
+        "y": 0.70308,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8809
+    },
+    {
+      "field_name": "Tax",
+      "value": "$1,878.50",
+      "bounding_box": {
+        "x": 0.60634,
+        "y": 0.74599,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.953
+    },
+    {
+      "field_name": "Total",
+      "value": "$23,978.50",
+      "bounding_box": {
+        "x": 0.60878,
+        "y": 0.79269,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8927
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "document_type": "employment_form",
+  "sample_index": 4,
+  "description": "Simulated employment form #4 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Employee Name",
+      "value": "Emily Davis",
+      "bounding_box": {
+        "x": 0.04907,
+        "y": 0.08908,
+        "width": 0.35,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9763
+    },
+    {
+      "field_name": "Date of Birth",
+      "value": "1992-05-18",
+      "bounding_box": {
+        "x": 0.04527,
+        "y": 0.14001,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8997
+    },
+    {
+      "field_name": "SSN",
+      "value": "***-**-3456",
+      "bounding_box": {
+        "x": 0.05825,
+        "y": 0.20741,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9128
+    },
+    {
+      "field_name": "Address",
+      "value": "321 Elm Blvd",
+      "bounding_box": {
+        "x": 0.05278,
+        "y": 0.26218,
+        "width": 0.45,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8968
+    },
+    {
+      "field_name": "City",
+      "value": "Austin",
+      "bounding_box": {
+        "x": 0.05525,
+        "y": 0.32079,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9656
+    },
+    {
+      "field_name": "State",
+      "value": "TX",
+      "bounding_box": {
+        "x": 0.30061,
+        "y": 0.31001,
+        "width": 0.1,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9157
+    },
+    {
+      "field_name": "Zip Code",
+      "value": "73301",
+      "bounding_box": {
+        "x": 0.44039,
+        "y": 0.32858,
+        "width": 0.12,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9767
+    },
+    {
+      "field_name": "Phone Number",
+      "value": "(512) 555-0134",
+      "bounding_box": {
+        "x": 0.05663,
+        "y": 0.37615,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8864
+    },
+    {
+      "field_name": "Email",
+      "value": "emily.d@example.com",
+      "bounding_box": {
+        "x": 0.05756,
+        "y": 0.44894,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8894
+    },
+    {
+      "field_name": "Position Applied For",
+      "value": "UX Designer",
+      "bounding_box": {
+        "x": 0.04972,
+        "y": 0.49138,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9637
+    },
+    {
+      "field_name": "Start Date",
+      "value": "2024-04-01",
+      "bounding_box": {
+        "x": 0.05532,
+        "y": 0.55257,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9323
+    },
+    {
+      "field_name": "Salary Expected",
+      "value": "$105,000",
+      "bounding_box": {
+        "x": 0.301,
+        "y": 0.5553,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.976
+    }
+  ]
+}

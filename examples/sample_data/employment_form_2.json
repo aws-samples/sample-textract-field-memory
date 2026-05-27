@@ -1,0 +1,151 @@
+{
+  "document_type": "employment_form",
+  "sample_index": 2,
+  "description": "Simulated employment form #2 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Employee Name",
+      "value": "Sarah Johnson",
+      "bounding_box": {
+        "x": 0.05659,
+        "y": 0.08237,
+        "width": 0.35,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9748
+    },
+    {
+      "field_name": "Date of Birth",
+      "value": "1990-07-22",
+      "bounding_box": {
+        "x": 0.05155,
+        "y": 0.14409,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.885
+    },
+    {
+      "field_name": "SSN",
+      "value": "***-**-5678",
+      "bounding_box": {
+        "x": 0.04456,
+        "y": 0.19579,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8888
+    },
+    {
+      "field_name": "Address",
+      "value": "456 Oak Ave",
+      "bounding_box": {
+        "x": 0.04466,
+        "y": 0.25202,
+        "width": 0.45,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9106
+    },
+    {
+      "field_name": "City",
+      "value": "Portland",
+      "bounding_box": {
+        "x": 0.05271,
+        "y": 0.3173,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9207
+    },
+    {
+      "field_name": "State",
+      "value": "OR",
+      "bounding_box": {
+        "x": 0.29419,
+        "y": 0.31534,
+        "width": 0.1,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.983
+    },
+    {
+      "field_name": "Zip Code",
+      "value": "97201",
+      "bounding_box": {
+        "x": 0.45296,
+        "y": 0.32218,
+        "width": 0.12,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8988
+    },
+    {
+      "field_name": "Phone Number",
+      "value": "(503) 555-0198",
+      "bounding_box": {
+        "x": 0.05458,
+        "y": 0.37327,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9217
+    },
+    {
+      "field_name": "Email",
+      "value": "sarah.j@example.org",
+      "bounding_box": {
+        "x": 0.05979,
+        "y": 0.4428,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9413
+    },
+    {
+      "field_name": "Position Applied For",
+      "value": "Data Analyst",
+      "bounding_box": {
+        "x": 0.05369,
+        "y": 0.50686,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9654
+    },
+    {
+      "field_name": "Start Date",
+      "value": "2024-03-15",
+      "bounding_box": {
+        "x": 0.04458,
+        "y": 0.55064,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9147
+    },
+    {
+      "field_name": "Salary Expected",
+      "value": "$95,000",
+      "bounding_box": {
+        "x": 0.29535,
+        "y": 0.55422,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9837
+    }
+  ]
+}

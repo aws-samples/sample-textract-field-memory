@@ -1,0 +1,103 @@
+{
+  "document_type": "invoice",
+  "sample_index": 5,
+  "description": "Simulated invoice #5 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Invoice Number",
+      "value": "INV-2024-005",
+      "bounding_box": {
+        "x": 0.59214,
+        "y": 0.05106,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.91
+    },
+    {
+      "field_name": "Invoice Date",
+      "value": "2024-02-18",
+      "bounding_box": {
+        "x": 0.6021,
+        "y": 0.10435,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9024
+    },
+    {
+      "field_name": "Due Date",
+      "value": "2024-03-19",
+      "bounding_box": {
+        "x": 0.60268,
+        "y": 0.14528,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9337
+    },
+    {
+      "field_name": "Bill To",
+      "value": "EduLearn Platform, 10 Campus Rd",
+      "bounding_box": {
+        "x": 0.05811,
+        "y": 0.20692,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8902
+    },
+    {
+      "field_name": "Ship To",
+      "value": "EduLearn Office, 12 Scholar Ave",
+      "bounding_box": {
+        "x": 0.44847,
+        "y": 0.19553,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8804
+    },
+    {
+      "field_name": "Subtotal",
+      "value": "$3,600.00",
+      "bounding_box": {
+        "x": 0.60542,
+        "y": 0.70274,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9088
+    },
+    {
+      "field_name": "Tax",
+      "value": "$306.00",
+      "bounding_box": {
+        "x": 0.60482,
+        "y": 0.75103,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.927
+    },
+    {
+      "field_name": "Total",
+      "value": "$3,906.00",
+      "bounding_box": {
+        "x": 0.59019,
+        "y": 0.7915,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9771
+    }
+  ]
+}

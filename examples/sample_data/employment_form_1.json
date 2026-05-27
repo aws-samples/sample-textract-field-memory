@@ -1,0 +1,151 @@
+{
+  "document_type": "employment_form",
+  "sample_index": 1,
+  "description": "Simulated employment form #1 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Employee Name",
+      "value": "John Smith",
+      "bounding_box": {
+        "x": 0.05279,
+        "y": 0.0705,
+        "width": 0.35,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9103
+    },
+    {
+      "field_name": "Date of Birth",
+      "value": "1985-03-15",
+      "bounding_box": {
+        "x": 0.04446,
+        "y": 0.14473,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9544
+    },
+    {
+      "field_name": "SSN",
+      "value": "***-**-1234",
+      "bounding_box": {
+        "x": 0.05784,
+        "y": 0.19174,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9264
+    },
+    {
+      "field_name": "Address",
+      "value": "123 Main St",
+      "bounding_box": {
+        "x": 0.0406,
+        "y": 0.25437,
+        "width": 0.45,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9356
+    },
+    {
+      "field_name": "City",
+      "value": "Seattle",
+      "bounding_box": {
+        "x": 0.04053,
+        "y": 0.31398,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9515
+    },
+    {
+      "field_name": "State",
+      "value": "WA",
+      "bounding_box": {
+        "x": 0.3009,
+        "y": 0.31441,
+        "width": 0.1,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9448
+    },
+    {
+      "field_name": "Zip Code",
+      "value": "98101",
+      "bounding_box": {
+        "x": 0.45619,
+        "y": 0.31013,
+        "width": 0.12,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9686
+    },
+    {
+      "field_name": "Phone Number",
+      "value": "(206) 555-0142",
+      "bounding_box": {
+        "x": 0.05396,
+        "y": 0.37681,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8971
+    },
+    {
+      "field_name": "Email",
+      "value": "john.smith@example.com",
+      "bounding_box": {
+        "x": 0.05914,
+        "y": 0.43673,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8902
+    },
+    {
+      "field_name": "Position Applied For",
+      "value": "Software Engineer",
+      "bounding_box": {
+        "x": 0.04193,
+        "y": 0.50695,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9464
+    },
+    {
+      "field_name": "Start Date",
+      "value": "2024-02-01",
+      "bounding_box": {
+        "x": 0.05614,
+        "y": 0.56459,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.939
+    },
+    {
+      "field_name": "Salary Expected",
+      "value": "$120,000",
+      "bounding_box": {
+        "x": 0.30946,
+        "y": 0.55757,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9407
+    }
+  ]
+}

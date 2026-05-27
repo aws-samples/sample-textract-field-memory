@@ -1,0 +1,103 @@
+{
+  "document_type": "invoice",
+  "sample_index": 2,
+  "description": "Simulated invoice #2 with slight positional variation (var=0.01)",
+  "fields": [
+    {
+      "field_name": "Invoice Number",
+      "value": "INV-2024-002",
+      "bounding_box": {
+        "x": 0.59971,
+        "y": 0.04427,
+        "width": 0.2,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9241
+    },
+    {
+      "field_name": "Invoice Date",
+      "value": "2024-01-22",
+      "bounding_box": {
+        "x": 0.59117,
+        "y": 0.09758,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9884
+    },
+    {
+      "field_name": "Due Date",
+      "value": "2024-02-21",
+      "bounding_box": {
+        "x": 0.5953,
+        "y": 0.15568,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9301
+    },
+    {
+      "field_name": "Bill To",
+      "value": "TechStart Inc, 55 Innovation Dr",
+      "bounding_box": {
+        "x": 0.04846,
+        "y": 0.20915,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9895
+    },
+    {
+      "field_name": "Ship To",
+      "value": "TechStart Lab, 60 Research Blvd",
+      "bounding_box": {
+        "x": 0.45112,
+        "y": 0.20437,
+        "width": 0.3,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.897
+    },
+    {
+      "field_name": "Subtotal",
+      "value": "$12,750.00",
+      "bounding_box": {
+        "x": 0.59593,
+        "y": 0.70937,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9437
+    },
+    {
+      "field_name": "Tax",
+      "value": "$1,083.75",
+      "bounding_box": {
+        "x": 0.60084,
+        "y": 0.75496,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.8863
+    },
+    {
+      "field_name": "Total",
+      "value": "$13,833.75",
+      "bounding_box": {
+        "x": 0.60168,
+        "y": 0.80006,
+        "width": 0.15,
+        "height": 0.03
+      },
+      "page": 1,
+      "confidence": 0.9738
+    }
+  ]
+}
