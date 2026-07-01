@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Tuple
 
 from field_memory.models import FieldLocationMap
+from field_memory.utils import normalize_field_name
 
 
 @dataclass
@@ -86,7 +87,9 @@ class DriftDetector:
         doc_fields: Dict[str, Dict[str, float]] = {}
         for page in document.pages:
             for kv in page.key_values:
-                field_name = " ".join(word.text for word in kv.key).strip()
+                field_name = normalize_field_name(
+                    " ".join(word.text for word in kv.key)
+                )
                 field_name_lower = field_name.lower()
                 bbox = {
                     "x": kv.bbox.x,

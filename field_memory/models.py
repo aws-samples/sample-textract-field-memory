@@ -12,6 +12,8 @@ import math
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+from field_memory.utils import normalize_field_name
+
 
 @dataclass
 class FieldRegion:
@@ -118,7 +120,15 @@ class FieldLocationMap:
     def get_field_region(
         self, field_name: str, page: Optional[int] = None
     ) -> Optional[FieldRegion]:
+        # Try exact match first
         regions = self.fields.get(field_name)
+        # If not found, try normalized match (handles "Employee Name:" vs "Employee Name")
+        if not regions:
+            normalized_query = normalize_field_name(field_name).lower()
+            for stored_name, stored_regions in self.fields.items():
+                if normalize_field_name(stored_name).lower() == normalized_query:
+                    regions = stored_regions
+                    break
         if not regions:
             return None
         if page is not None:

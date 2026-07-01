@@ -12,6 +12,8 @@ import math
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
+from field_memory.utils import normalize_field_name
+
 
 @dataclass
 class FieldMatch:
@@ -143,7 +145,7 @@ class SpatialMatcher:
         """Score and sort candidates by combined spatial + name similarity."""
         matches = []
         for candidate in candidates:
-            key_text = " ".join([w.text for w in candidate.key]).strip()
+            key_text = normalize_field_name(" ".join([w.text for w in candidate.key]))
             name_score = _normalized_name_similarity(
                 field_name.lower(), key_text.lower()
             )
