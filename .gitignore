@@ -13,3 +13,4 @@ venv/
 dashboard/store_path/
 PCR.md
 .threatmodel/
+benchmarks/

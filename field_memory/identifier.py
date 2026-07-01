@@ -10,6 +10,7 @@ from typing import Any, List, Optional
 
 from field_memory.matcher import SpatialMatcher
 from field_memory.models import FieldLocationMap
+from field_memory.utils import normalize_field_name
 
 logger = logging.getLogger(__name__)
 
@@ -81,9 +82,11 @@ class TemplateIdentifier:
     def compute_structural_similarity(
         self, doc_field_names: List[str], template: FieldLocationMap
     ) -> float:
-        """Jaccard similarity of field name sets (case-insensitive)."""
-        doc_set = set(name.lower().strip() for name in doc_field_names)
-        template_set = set(name.lower().strip() for name in template.fields.keys())
+        """Jaccard similarity of field name sets (case-insensitive, normalized)."""
+        doc_set = set(normalize_field_name(name).lower() for name in doc_field_names)
+        template_set = set(
+            normalize_field_name(name).lower() for name in template.fields.keys()
+        )
         if not doc_set and not template_set:
             return 0.0
         intersection = doc_set & template_set
@@ -97,7 +100,9 @@ class TemplateIdentifier:
         doc_fields: dict = {}
         for page in document.pages:
             for kv in page.key_values:
-                key_text = " ".join([w.text for w in kv.key]).strip().lower()
+                key_text = normalize_field_name(
+                    " ".join([w.text for w in kv.key])
+                ).lower()
                 if key_text and key_text not in doc_fields:
                     doc_fields[key_text] = {
                         "x": kv.bbox.x,
@@ -108,7 +113,7 @@ class TemplateIdentifier:
 
         template_fields: dict = {}
         for field_name, regions in template.fields.items():
-            lower_name = field_name.lower().strip()
+            lower_name = normalize_field_name(field_name).lower()
             if regions and lower_name not in template_fields:
                 best_region = max(regions, key=lambda r: r.occurrence_count)
                 template_fields[lower_name] = best_region.bbox
@@ -149,7 +154,9 @@ class TemplateIdentifier:
         field_names = set()
         for page in document.pages:
             for kv in page.key_values:
-                key_text = " ".join([w.text for w in kv.key]).strip().lower()
+                key_text = normalize_field_name(
+                    " ".join([w.text for w in kv.key])
+                ).lower()
                 if key_text:
                     field_names.add(key_text)
         return field_names
