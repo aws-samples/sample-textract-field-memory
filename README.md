@@ -10,23 +10,135 @@ requirements before deployment.
 
 ---
 
-Spatial field location memory for AWS Textract document processing pipelines.
+## The Problem
 
-After processing a few documents of the same type, this library remembers WHERE each field appears on the page. On subsequent documents, it uses that spatial knowledge to validate extractions, identify document types, detect anomalies, and monitor template health over time.
+Every system that processes recurring structured data starts from scratch each time. It has no memory of what it saw yesterday.
 
-Works great when documents share the same layout — same form, same vendor invoice, same template. Fields appear in predictable positions, and the library learns and exploits that consistency.
+```
+                    WITHOUT spatial memory
+┌──────────────┐
+│  Document 1  │──► OCR/Extract ──► "Employee Name" at (0.05, 0.10) ──► ✓ stored nowhere
+│  Document 2  │──► OCR/Extract ──► "Employee Name" at (0.05, 0.10) ──► ✓ re-discovered
+│  Document 3  │──► OCR/Extract ──► "Employee Name" at (0.05, 0.10) ──► ✓ re-discovered again
+│     ...      │
+│  Document N  │──► OCR/Extract ──► "Employee Name" at (0.70, 0.85) ──► ✓ looks fine (but WRONG)
+└──────────────┘
+    No validation. No routing. No anomaly detection. No learning.
+```
 
-Doesn't help with extraction when documents in the same category have completely different layouts (e.g., invoices from 50 different vendors with 50 different designs). There's no single spatial pattern to learn across them.
+```
+                    WITH spatial memory
+┌──────────────┐
+│  Document 1  │──► OCR/Extract ──► memory.record() ──► learns positions
+│  Document 2  │──► OCR/Extract ──► memory.record() ──► refines positions
+│  Document 3  │──► OCR/Extract ──► memory.locate()  ──► "confidence: 0.95 ✓"
+│     ...      │
+│  Document N  │──► OCR/Extract ──► memory.locate()  ──► "confidence: 0.33 ⚠️ ANOMALY"
+└──────────────┘
+    Validates. Routes. Detects anomalies. Learns. Monitors drift.
+```
 
-But it still helps you answer: "Are these documents the same layout or different?"
+**The core idea:** If you've seen 100 identical forms, you KNOW where "Employee Name" should be. If it suddenly appears somewhere else, something is wrong — the form changed, someone tampered with it, or the extraction went sideways.
+
+## Beyond Document Processing
+
+This library works with **any structured data that has spatial/positional attributes** — not just OCR documents:
+
+| Domain | What it remembers | What it detects |
+|---|---|---|
+| Document OCR (Textract, Tesseract) | Where fields appear on pages | Form changes, extraction errors, tampering |
+| UI Testing | Where buttons/inputs render on screen | Layout regressions, responsive breakages |
+| Satellite/Geo imagery | Where objects appear in frames | Object displacement, environmental change |
+| Manufacturing inspection | Where components sit on boards | Assembly defects, alignment drift |
+| Medical imaging | Where anatomical landmarks appear | Scan positioning errors, anomalies |
+| Retail planograms | Where products sit on shelves | Misplacement, compliance violations |
+
+The only requirement: your data has **named entities** with **bounding boxes** (x, y, width, height) in normalized coordinates. Feed that in, and the library builds spatial memory over it.
+
+For detailed industry use cases, see [USE_CASES.md](docs/USE_CASES.md).
 
 ---
 
+![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue) ![Tests](https://img.shields.io/badge/tests-158%20passing-green) ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen) ![License](https://img.shields.io/badge/license-MIT--0-blue)
+
 **Give your document processing pipeline a memory.**
 
-This library sits after OCR/Textract extraction and remembers WHERE fields appear on recurring document types. It learns spatial patterns from processed documents, then uses that knowledge to validate extractions, auto-identify document types, detect anomalies, monitor template drift, and tell you when to skip expensive LLM calls.
+This library sits after any extraction step and remembers WHERE named entities appear in a spatial layout. It learns patterns from recurring inputs, then uses that knowledge to validate, identify, detect anomalies, monitor drift, and reduce expensive reprocessing.
 
-Zero dependencies. Zero network calls. Pure Python. Works with any OCR output.
+Zero dependencies. Zero network calls. Pure Python. Works with any input that has named entities + bounding boxes.
+
+## Try It in 30 Seconds
+
+```bash
+pip install -e .
+python examples/demo.py
+```
+
+That's it. No AWS credentials, no config, no external services. You'll see template learning, spatial matching, anomaly detection, and drift analysis — all from synthetic data.
+
+## Should You Use This?
+
+```
+Do you process recurring structured documents/layouts?
+├── YES → Do they share the same layout (same form, same vendor)?
+│         ├── YES → ✅ This library will help (learns positions, validates, detects anomalies)
+│         └── NO  → ⚠️ Won't help with extraction, but WILL help you detect/cluster layouts
+└── NO  → ❌ Not for you
+```
+
+## Architecture
+
+```mermaid
+graph LR
+    subgraph Input ["Any Source"]
+        A[Textract] 
+        B[Tesseract]
+        C[Custom OCR]
+    end
+
+    subgraph Library ["textract-field-memory"]
+        D[TemplateMemory Facade]
+        E[Template Store<br/>JSON files]
+        F[Spatial Matcher<br/>IoU + Distance]
+        G[Template Identifier<br/>Jaccard + Spatial]
+        H[Analytics<br/>Health + Drift]
+        I[Cluster Tracker<br/>Membership]
+    end
+
+    subgraph Output ["Results"]
+        J[Validation ✓/✗]
+        K[Document Type ID]
+        L[Anomaly Alerts]
+        M[Health Dashboard]
+    end
+
+    A -->|"fields + bboxes"| D
+    B -->|"fields + bboxes"| D
+    C -->|"fields + bboxes"| D
+    D --> E
+    D --> F
+    D --> G
+    D --> H
+    D --> I
+    D --> J
+    D --> K
+    D --> L
+    D --> M
+```
+
+## FAQ
+
+**Q: Does this replace Textract or any OCR engine?**
+No. It sits *after* OCR. It needs someone else to extract the fields first — it just remembers where they appeared.
+
+**Q: Do I need AWS credentials to use this?**
+No. Zero network calls, zero AWS dependencies. It works locally with JSON files.
+
+**Q: What if my documents are all different layouts?**
+It won't help you extract from them, but it will cluster them — telling you "these 12 invoices share a layout, these 8 are different." You can then route known layouts to cheap processing and unknown ones to expensive LLM extraction.
+
+**Q: How many documents does it need to learn a template?**
+3-5 documents is enough for basic matching. 10+ gives high-confidence spatial scores.
 
 ```python
 from field_memory import TemplateMemory
