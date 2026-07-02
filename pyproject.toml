@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "textract-field-memory"
-version = "0.1.0"
+version = "0.2.0"
 description = "Spatial field location memory for AWS Textract document processing pipelines."
 readme = "README.md"
 license = {text = "MIT-0"}
@@ -37,7 +37,7 @@ classifiers = [
 ]
 
 [[project.authors]]
-name = "avnban1988"
+name = "avneetbansal-aws"
 
 [project.urls]
 Homepage = "https://code.aws.dev/proserve/aws-ml-companions/textract-field-memory"
