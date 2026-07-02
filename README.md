@@ -771,6 +771,23 @@ Templates are stored as small JSON files (~2–5KB each):
 }
 ```
 
+## Interactive Dashboard
+
+A Streamlit-based web dashboard for visualizing template health, field positions, drift, and cluster membership.
+
+```bash
+# Demo mode (auto-seeds with synthetic data)
+pip install textract-field-memory[dashboard]
+streamlit run dashboard/app.py
+
+# Production mode (point at your existing templates)
+FIELD_MEMORY_STORE=/path/to/your/templates streamlit run dashboard/app.py
+```
+
+The dashboard provides 9 interactive views: System Overview, Record Documents, Field Lookup, Identify Template, Template Detail, Field Positions, Drift Analysis, Cluster Membership, and Export/Import.
+
+In production mode, it reads directly from your pipeline's template store — no code changes needed. Any templates your pipeline creates via `memory.record()` are immediately visible in the dashboard.
+
 ## Development
 
 ```bash
