@@ -28,11 +28,31 @@ class TemplateMatch:
 class TemplateIdentifier:
     """Identifies which stored template best matches a given document.
 
-    Combined score = 0.6 * structural_similarity + 0.4 * spatial_similarity
+    Combined score uses both structural (name) and spatial (position) similarity.
+    Both components must meet minimum thresholds to accept a match, preventing
+    documents with correct field names but wrong positions from passing.
+
+    Args:
+        similarity_threshold: Minimum combined score to accept a match.
+        spatial_weight: Weight for spatial similarity in combined score (0.0-1.0).
+        name_weight: Weight for structural/name similarity (1.0 - spatial_weight).
+        min_spatial_score: Minimum spatial score required (below this = heavy penalty).
+        min_structural_score: Minimum structural score required.
     """
 
-    def __init__(self, similarity_threshold: float = 0.7):
+    def __init__(
+        self,
+        similarity_threshold: float = 0.7,
+        spatial_weight: float = 0.6,
+        name_weight: float = 0.4,
+        min_spatial_score: float = 0.4,
+        min_structural_score: float = 0.3,
+    ):
         self.similarity_threshold = similarity_threshold
+        self.spatial_weight = spatial_weight
+        self.name_weight = name_weight
+        self.min_spatial_score = min_spatial_score
+        self.min_structural_score = min_structural_score
         self._spatial_matcher = SpatialMatcher()
 
     def identify(
@@ -53,7 +73,19 @@ class TemplateIdentifier:
                     list(doc_field_names), template
                 )
                 spatial_sim = self.compute_spatial_similarity(document, template)
-                combined = 0.6 * structural_sim + 0.4 * spatial_sim
+
+                # Both components must meet minimum bar
+                # This prevents docs with correct names but wrong positions from passing
+                if (
+                    structural_sim < self.min_structural_score
+                    or spatial_sim < self.min_spatial_score
+                ):
+                    combined = min(structural_sim, spatial_sim) * 0.5
+                else:
+                    combined = (
+                        self.name_weight * structural_sim
+                        + self.spatial_weight * spatial_sim
+                    )
 
                 is_better = combined > best_score or (
                     combined == best_score and structural_sim > best_structural

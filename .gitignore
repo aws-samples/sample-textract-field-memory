@@ -13,4 +13,7 @@ venv/
 dashboard/store_path/
 PCR.md
 .threatmodel/
-benchmarks/
+.temp/
+temp/
+.hypothesis/
+benchmarks/output/

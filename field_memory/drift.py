@@ -63,11 +63,15 @@ class DriftDetector:
 
     Args:
         drift_threshold: The threshold above which a field is considered drifting.
-                        Default is 0.1. Must be in [0.0, 1.0].
+                        Default is 0.03 (3% of page diagonal). Must be in [0.0, 1.0].
+                        Lower values detect smaller positional changes.
+        min_drifting_ratio: Fraction of fields that must drift to flag the document.
+                          Default is 0.2 (20% of shared fields must drift).
     """
 
-    def __init__(self, drift_threshold: float = 0.1):
+    def __init__(self, drift_threshold: float = 0.03, min_drifting_ratio: float = 0.2):
         self.drift_threshold = drift_threshold
+        self.min_drifting_ratio = min_drifting_ratio
 
     def detect(self, document: Any, template: FieldLocationMap) -> DriftReport:
         """Compare document field positions against stored template.
@@ -156,7 +160,12 @@ class DriftDetector:
             overall_drift_score = 0.0
 
         # Step 6: Determine overall is_drifting flag
-        is_drifting = len(drifting_fields) > 0
+        # Document is drifting if enough fields exceed the threshold
+        if field_drifts:
+            drifting_ratio = len(drifting_fields) / len(field_drifts)
+            is_drifting = drifting_ratio >= self.min_drifting_ratio
+        else:
+            is_drifting = False
 
         # Build new_fields and missing_fields lists using original names where possible
         new_fields_list = sorted(new_fields_set)

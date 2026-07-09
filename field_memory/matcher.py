@@ -61,8 +61,8 @@ class SpatialMatcher:
     def __init__(
         self,
         spatial_tolerance: float = 0.05,
-        spatial_weight: float = 0.4,
-        name_weight: float = 0.6,
+        spatial_weight: float = 0.6,
+        name_weight: float = 0.4,
     ):
         self.spatial_tolerance = spatial_tolerance
         self.spatial_weight = spatial_weight
@@ -119,7 +119,9 @@ class SpatialMatcher:
 
         if iou > 0:
             return 0.7 * iou + 0.3 * distance_score
-        return distance_score
+        # No overlap at all — heavy penalty. Use distance_score squared
+        # to make non-overlapping fields score much lower
+        return distance_score * distance_score * 0.5
 
     def find_field(
         self,

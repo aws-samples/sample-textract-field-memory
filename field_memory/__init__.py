@@ -14,6 +14,7 @@ from field_memory.analytics import (
 )
 from field_memory.batch import BatchItemResult, BatchProcessor, BatchResult
 from field_memory.cluster_models import ClusterData, ClusterStats, MembershipRecord
+from field_memory.config import FieldMemoryConfig
 from field_memory.drift import DriftDetector, DriftReport, FieldDriftResult
 from field_memory.export import TemplateExporter
 from field_memory.facade import TemplateMemory
@@ -26,6 +27,7 @@ __version__ = "0.2.0"
 
 __all__ = [
     "TemplateMemory",
+    "FieldMemoryConfig",
     "FieldLocationMap",
     "FieldRegion",
     "FieldMatch",
