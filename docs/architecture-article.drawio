@@ -1,0 +1,111 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.9 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="26.0.9">
+  <diagram name="Pipeline Architecture" id="pipeline-arch">
+    <mxGraphModel dx="2874" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;dashPattern=5 5;arcSize=14;" parent="1" vertex="1">
+          <mxGeometry x="-140" y="20" width="1400" height="550" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="textract-field-memory — Pipeline Architecture" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#333333;" parent="1" vertex="1">
+          <mxGeometry x="380" y="30" width="440" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="input-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="40" y="80" width="160" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="input-title" value="INPUT SOURCES" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontStyle=1;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="60" y="90" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" value="📄 AWS Textract" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="55" y="120" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="📄 Tesseract OCR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="55" y="175" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="📄 Google Vision" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="55" y="230" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="📄 Azure Form" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="55" y="285" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="📄 Custom JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="55" y="340" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lib-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="260" y="80" width="420" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="lib-title" value="textract-field-memory (Pure Python, Zero Dependencies)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="305" y="90" width="340" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="facade" value="🧠 TemplateMemory&lt;br&gt;(Facade API)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="120" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="Spatial Matcher&lt;br&gt;&lt;i&gt;IoU + Levenshtein&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4CAF50;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="275" y="195" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" value="Template Identifier&lt;br&gt;&lt;i&gt;Jaccard + Spatial&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4CAF50;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="420" y="195" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" value="Analytics&lt;br&gt;&lt;i&gt;Health + Drift&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4CAF50;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="275" y="260" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" value="Cluster Tracker&lt;br&gt;&lt;i&gt;Membership&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4CAF50;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="420" y="260" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" value="Batch + Export&lt;br&gt;&lt;i&gt;JSON / CSV&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4CAF50;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="565" y="195" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="store" value="💾 Template Store&lt;br&gt;(JSON files on disk)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="330" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="decision" value="Score ≥ 0.85?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="740" y="180" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="out-yes" value="✅ Use OCR Result&lt;br&gt;&lt;b&gt;FREE, &lt;1ms&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="920" y="120" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="out-no" value="🤖 Call LLM/Bedrock" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="920" y="250" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="out-extra-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="880" y="330" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="out-extra-title" value="MONITORING OUTPUTS" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1;fontColor=#6A1B9A;" parent="1" vertex="1">
+          <mxGeometry x="930" y="335" width="140" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="out1" value="📊 Health Dashboard" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="890" y="355" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="out2" value="⚠️ Drift Alerts" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="890" y="375" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="out3" value="🔍 Anomaly Detection" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="890" y="395" width="130" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="out4" value="📈 Cluster Tracking" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1010" y="355" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="out5" value="🏷️ Document Routing" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1010" y="375" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1565C0;strokeWidth=2;" parent="1" source="s1" target="facade" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a1-label" value="fields + bboxes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#666;" parent="a1" vertex="1" connectable="0">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a6" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2E7D32;strokeWidth=2;" parent="1" source="facade" target="decision" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" value="YES " style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2E7D32;strokeWidth=2;fontColor=#2E7D32;fontSize=10;fontStyle=1;" parent="1" source="decision" target="out-yes" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a8" value="NO" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#C62828;strokeWidth=2;fontColor=#C62828;fontSize=10;fontStyle=1;" parent="1" source="decision" target="out-no" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
