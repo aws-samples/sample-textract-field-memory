@@ -17,6 +17,7 @@ from field_memory.batch import BatchProcessor, BatchResult
 from field_memory.cluster_models import ClusterStats, MembershipRecord
 from field_memory.cluster_store import ClusterStore
 from field_memory.cluster_tracker import ClusterTracker
+from field_memory.config import FieldMemoryConfig
 from field_memory.drift import DriftDetector, DriftReport
 from field_memory.export import TemplateExporter
 from field_memory.identifier import TemplateIdentifier, TemplateMatch
@@ -34,10 +35,10 @@ class TemplateMemory:  # pylint: disable=too-many-instance-attributes
         store_path: Directory for template JSON files. Default: ~/.field_memory/templates
         spatial_tolerance: Position tolerance (0.05 = 5%). Default: 0.05
         similarity_threshold: Min score to match a template. Default: 0.7
-        spatial_weight: Weight for spatial scoring. Default: 0.4
-        name_weight: Weight for name matching. Default: 0.6
+        spatial_weight: Weight for spatial scoring. Default: 0.6
+        name_weight: Weight for name matching. Default: 0.4
         decay_factor: Decay factor for confidence weighting. Default: 0.95
-        drift_threshold: Threshold for drift detection. Default: 0.1
+        drift_threshold: Threshold for drift detection. Default: 0.03
     """
 
     def __init__(  # pylint: disable=too-many-positional-arguments
@@ -45,13 +46,17 @@ class TemplateMemory:  # pylint: disable=too-many-instance-attributes
         store_path: Path = Path.home() / ".field_memory" / "templates",
         spatial_tolerance: float = 0.05,
         similarity_threshold: float = 0.7,
-        spatial_weight: float = 0.4,
-        name_weight: float = 0.6,
+        spatial_weight: float = 0.6,
+        name_weight: float = 0.4,
         decay_factor: float = 0.95,
-        drift_threshold: float = 0.1,
+        drift_threshold: float = 0.03,
     ):
         self.store = TemplateStore(store_path)
-        self.identifier = TemplateIdentifier(similarity_threshold)
+        self.identifier = TemplateIdentifier(
+            similarity_threshold,
+            spatial_weight=spatial_weight,
+            name_weight=name_weight,
+        )
         self.matcher = SpatialMatcher(spatial_tolerance, spatial_weight, name_weight)
         self.spatial_tolerance = spatial_tolerance
         self.decay_factor = decay_factor
@@ -63,9 +68,47 @@ class TemplateMemory:  # pylint: disable=too-many-instance-attributes
 
         # Analytics, drift, batch, and export subsystems
         self._analytics = TemplateAnalytics(self.store)
-        self._drift_detector = DriftDetector(drift_threshold)
+        self._drift_detector = DriftDetector(drift_threshold, min_drifting_ratio=0.2)
         self._batch_processor = BatchProcessor(self)
         self._exporter = TemplateExporter(self.store)
+
+    @classmethod
+    def from_config(
+        cls,
+        config: Optional["FieldMemoryConfig"] = None,
+        config_path: Optional[str] = None,
+    ) -> "TemplateMemory":
+        """Create TemplateMemory from a config object or file.
+
+        Args:
+            config: A FieldMemoryConfig instance. If None, auto-loads from file/env.
+            config_path: Path to config file. Only used if config is None.
+
+        Returns:
+            Configured TemplateMemory instance.
+
+        Example:
+            # Auto-discover config file
+            memory = TemplateMemory.from_config()
+
+            # From explicit path
+            memory = TemplateMemory.from_config(config_path="./my_config.yaml")
+
+            # From config object
+            cfg = FieldMemoryConfig(spatial_weight=0.8, drift_threshold=0.02)
+            memory = TemplateMemory.from_config(cfg)
+        """
+        if config is None:
+            config = FieldMemoryConfig.load(config_path)
+        return cls(
+            store_path=Path(config.store_path),
+            spatial_tolerance=config.spatial_tolerance,
+            similarity_threshold=config.similarity_threshold,
+            spatial_weight=config.spatial_weight,
+            name_weight=config.name_weight,
+            decay_factor=config.decay_factor,
+            drift_threshold=config.drift_threshold,
+        )
 
     def record(  # pylint: disable=too-many-branches
         self,

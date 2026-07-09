@@ -22,10 +22,10 @@ from typing import List
 
 from field_memory import TemplateMemory
 
-
 # =============================================================================
 # Mock document objects
 # =============================================================================
+
 
 @dataclass
 class Word:
@@ -72,11 +72,15 @@ class Document:
 # Document generators
 # =============================================================================
 
+
 def make_employment_form(variation: float = 0.0) -> Document:
     """Simulate an employment form with optional positional jitter."""
+
     def jitter(v):
         if variation:
-            return max(0.001, min(0.95, v + random.uniform(-variation, variation)))  # nosec B311
+            return max(
+                0.001, min(0.95, v + random.uniform(-variation, variation))
+            )  # nosec B311
         return v
 
     fields = [
@@ -98,7 +102,7 @@ def make_employment_form(variation: float = 0.0) -> Document:
             key=[Word(w) for w in name.split()],
             bbox=BBox(jitter(x), jitter(y), w, h),
             page=1,
-            confidence=random.uniform(0.88, 0.99)  # nosec B311,
+            confidence=random.uniform(0.88, 0.99),  # nosec B311,
         )
         for name, x, y, w, h in fields
     ]
@@ -107,9 +111,12 @@ def make_employment_form(variation: float = 0.0) -> Document:
 
 def make_invoice(variation: float = 0.0) -> Document:
     """Simulate an invoice document."""
+
     def jitter(v):
         if variation:
-            return max(0.001, min(0.95, v + random.uniform(-variation, variation)))  # nosec B311
+            return max(
+                0.001, min(0.95, v + random.uniform(-variation, variation))
+            )  # nosec B311
         return v
 
     fields = [
@@ -127,7 +134,7 @@ def make_invoice(variation: float = 0.0) -> Document:
             key=[Word(w) for w in name.split()],
             bbox=BBox(jitter(x), jitter(y), w, h),
             page=1,
-            confidence=random.uniform(0.88, 0.99)  # nosec B311,
+            confidence=random.uniform(0.88, 0.99),  # nosec B311,
         )
         for name, x, y, w, h in fields
     ]
@@ -137,15 +144,15 @@ def make_invoice(variation: float = 0.0) -> Document:
 def make_drifted_form() -> Document:
     """Simulate an employment form where fields have shifted positions."""
     fields = [
-        ("Employee Name", 0.10, 0.12, 0.35, 0.03),   # shifted right+down
-        ("Date of Birth", 0.10, 0.18, 0.20, 0.03),   # shifted right+down
-        ("SSN", 0.10, 0.24, 0.15, 0.03),             # shifted right+down
-        ("Address", 0.10, 0.30, 0.45, 0.03),         # shifted right+down
-        ("City", 0.10, 0.36, 0.20, 0.03),            # shifted right+down
-        ("State", 0.35, 0.36, 0.10, 0.03),           # shifted right+down
-        ("Zip Code", 0.50, 0.36, 0.12, 0.03),        # shifted right+down
-        ("Phone Number", 0.10, 0.42, 0.20, 0.03),    # shifted right+down
-        ("Email", 0.10, 0.48, 0.30, 0.03),           # shifted right+down
+        ("Employee Name", 0.10, 0.12, 0.35, 0.03),  # shifted right+down
+        ("Date of Birth", 0.10, 0.18, 0.20, 0.03),  # shifted right+down
+        ("SSN", 0.10, 0.24, 0.15, 0.03),  # shifted right+down
+        ("Address", 0.10, 0.30, 0.45, 0.03),  # shifted right+down
+        ("City", 0.10, 0.36, 0.20, 0.03),  # shifted right+down
+        ("State", 0.35, 0.36, 0.10, 0.03),  # shifted right+down
+        ("Zip Code", 0.50, 0.36, 0.12, 0.03),  # shifted right+down
+        ("Phone Number", 0.10, 0.42, 0.20, 0.03),  # shifted right+down
+        ("Email", 0.10, 0.48, 0.30, 0.03),  # shifted right+down
         ("Position Applied For", 0.10, 0.54, 0.30, 0.03),
         ("Start Date", 0.10, 0.60, 0.15, 0.03),
         ("Salary Expected", 0.35, 0.60, 0.15, 0.03),
@@ -156,7 +163,7 @@ def make_drifted_form() -> Document:
             key=[Word(w) for w in name.split()],
             bbox=BBox(x, y, w, h),
             page=1,
-            confidence=random.uniform(0.90, 0.98)  # nosec B311,
+            confidence=random.uniform(0.90, 0.98),  # nosec B311,
         )
         for name, x, y, w, h in fields
     ]
@@ -166,6 +173,7 @@ def make_drifted_form() -> Document:
 # =============================================================================
 # Demo
 # =============================================================================
+
 
 def main():
     """Run the analytics and monitoring demo."""
@@ -182,7 +190,7 @@ def main():
             store_path=Path(tmp),
             similarity_threshold=0.5,
             decay_factor=0.95,
-            drift_threshold=0.1,
+            drift_threshold=0.03,
         )
 
         # ─────────────────────────────────────────────────────────────
@@ -319,7 +327,9 @@ def main():
         # Export as CSV
         csv_data = memory.export_template("employment-form", fmt="csv")
         csv_lines = csv_data.strip().split("\n")
-        print(f"\n  CSV export: {len(csv_lines)} lines (1 header + {len(csv_lines)-1} data rows)")
+        print(
+            f"\n  CSV export: {len(csv_lines)} lines (1 header + {len(csv_lines)-1} data rows)"
+        )
         print(f"  Header: {csv_lines[0]}")
         print(f"  First row: {csv_lines[1]}")
 
@@ -331,8 +341,10 @@ def main():
         imported_id = memory2.import_template(json_data)
         print(f"\n  Imported template: '{imported_id}'")
         imported_template = memory2.get_template(imported_id)
-        print(f"  Verified: {len(imported_template.fields)} fields, "
-              f"sample_count={imported_template.sample_count}")
+        print(
+            f"  Verified: {len(imported_template.fields)} fields, "
+            f"sample_count={imported_template.sample_count}"
+        )
 
         # ─────────────────────────────────────────────────────────────
         # STEP 7: Confidence Decay in Action

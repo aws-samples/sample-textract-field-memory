@@ -249,6 +249,100 @@ This library deliberately has zero dependencies and makes zero network calls. Th
 
 **The design philosophy:** This library is the cheap, fast first pass that decides *whether* you need an LLM — not a wrapper around one.
 
+## Configuration
+
+All behavior is configurable via a YAML/JSON config file, environment variables, or constructor arguments.
+
+### Config File
+
+Create `field_memory.yaml` in your project root or `~/.field_memory/config.yaml`:
+
+```yaml
+# Scoring weights
+spatial_weight: 0.6       # Position matching weight (0.0-1.0)
+name_weight: 0.4          # Field name matching weight (0.0-1.0)
+
+# Identification thresholds
+similarity_threshold: 0.7  # Min score to accept a template match
+min_spatial_score: 0.4     # Min spatial score (below = reject)
+min_structural_score: 0.3  # Min name overlap (below = reject)
+
+# Drift detection
+drift_threshold: 0.03      # Per-field drift threshold (page diagonal fraction)
+min_drifting_ratio: 0.2    # Fraction of fields that must drift to flag
+
+# Spatial tolerance
+spatial_tolerance: 0.05    # Position tolerance for region checks (5% of page)
+
+# Confidence decay
+decay_factor: 0.95         # How quickly old data loses weight
+
+# Storage
+store_path: ./templates    # Where to save template JSON files
+```
+
+### Environment Variables
+
+Override any setting with `FIELD_MEMORY_` prefix:
+
+```bash
+export FIELD_MEMORY_SPATIAL_WEIGHT=0.8
+export FIELD_MEMORY_DRIFT_THRESHOLD=0.02
+export FIELD_MEMORY_STORE_PATH=/data/templates
+```
+
+### Loading Config
+
+```python
+from field_memory import TemplateMemory, FieldMemoryConfig
+
+# Auto-discover config (checks CWD, then ~/.field_memory/)
+memory = TemplateMemory.from_config()
+
+# Explicit config file
+memory = TemplateMemory.from_config(config_path="./my_config.yaml")
+
+# Programmatic config
+cfg = FieldMemoryConfig(spatial_weight=0.8, drift_threshold=0.02)
+memory = TemplateMemory.from_config(cfg)
+
+# Or just use constructor args (always override config file)
+memory = TemplateMemory(spatial_weight=0.8, drift_threshold=0.02)
+```
+
+### Parameter Reference
+
+| Parameter | Default | Range | Description |
+|---|---|---|---|
+| `spatial_weight` | 0.6 | 0.0–1.0 | How much position matters vs field names. Use 0.7–0.8 for fraud detection, 0.3–0.4 for noisy scans. |
+| `name_weight` | 0.4 | 0.0–1.0 | Complement of spatial_weight (auto-set to 1.0 - spatial_weight). |
+| `similarity_threshold` | 0.7 | 0.0–1.0 | Min score to accept `identify_template()` match. Lower = more matches. |
+| `min_spatial_score` | 0.4 | 0.0–1.0 | Floor for spatial similarity. Documents with correct names but wrong positions are rejected below this. |
+| `min_structural_score` | 0.3 | 0.0–1.0 | Floor for name overlap (Jaccard). Rejects when too few field names match. |
+| `drift_threshold` | 0.03 | 0.0–1.0 | Distance a field must move (as fraction of page diagonal) to count as drifting. 0.03 ≈ 4mm on letter paper. |
+| `min_drifting_ratio` | 0.2 | 0.0–1.0 | Fraction of fields that must drift before the document is flagged. Prevents single-field noise from triggering. |
+| `spatial_tolerance` | 0.05 | 0.0–1.0 | How far from expected position a field can be and still count as "within region." |
+| `decay_factor` | 0.95 | 0.0–1.0 | Weight decay for older observations. 0.95 = stable. 0.80 = adapts fast. 1.0 = no decay. |
+| `store_path` | ~/.field_memory/templates | path | Directory for template JSON persistence. |
+
+### Preset Profiles
+
+```python
+# For fraud/tampering detection (strict spatial matching)
+memory = TemplateMemory(spatial_weight=0.8, name_weight=0.2,
+                        min_spatial_score=0.6, similarity_threshold=0.8)
+
+# For noisy scans (lenient positioning, trust field names more)
+memory = TemplateMemory(spatial_weight=0.3, name_weight=0.7,
+                        spatial_tolerance=0.08, drift_threshold=0.06)
+
+# For form revision tracking (sensitive drift detection)
+memory = TemplateMemory(drift_threshold=0.02, min_drifting_ratio=0.1)
+
+# For high-throughput (fast adaptation, aggressive decay)
+memory = TemplateMemory(decay_factor=0.8)
+```
+
 | Concern | With embedded LLM | Without (current design) |
 |---|---|---|
 | Cost per call | $0.003–0.01 per field | $0 (pure computation) |
@@ -596,10 +690,10 @@ TemplateMemory(
     store_path="~/.field_memory/templates",  # where to save template JSON files
     spatial_tolerance=0.05,                  # 5% position tolerance
     similarity_threshold=0.7,                # min score to match a template
-    spatial_weight=0.4,                      # weight for spatial scoring
-    name_weight=0.6,                         # weight for name matching
+    spatial_weight=0.6,                      # weight for spatial scoring (higher = stricter positioning)
+    name_weight=0.4,                         # weight for name matching
     decay_factor=0.95,                       # confidence decay per merge [0.5, 1.0]
-    drift_threshold=0.1,                     # drift detection sensitivity
+    drift_threshold=0.03,                    # drift detection sensitivity (~4mm on letter paper)
 )
 ```
 
@@ -756,20 +850,85 @@ This library is a companion to [amazon-textract-textractor](https://github.com/a
 4. **Refine**: Each `record()` call merges observations using weighted averaging (with configurable decay)
 5. **Monitor**: Analytics compute health grades, stability scores, and drift detection from stored data
 
+### Memory Lifecycle
+
+The library builds spatial knowledge over time from operational document processing:
+
+```
+Day 1:    record(doc, "invoice-vendorA")   → Creates template, learns 15 field positions
+Day 2:    record(doc, "invoice-vendorA")   → Refines positions (weighted average), sample_count=2
+  ...
+Day 30:   record(doc, "invoice-vendorA")   → 30 samples, positions stabilized, high confidence
+Day 31:   locate(new_doc, "Total Amount")  → Returns position with score 0.95 (knows where it is)
+Day 60:   identify_template(unknown_doc)   → "invoice-vendorA" (score=0.87) — recognized!
+Day 90:   detect_drift(new_doc, "invoice-vendorA") → drift=0.04 ⚠️ form layout changed
+```
+
+**Key points:**
+- Memory persists across sessions — knowledge built today is available tomorrow
+- Each `record()` strengthens the template (more samples = higher confidence)
+- Confidence decay ensures recent observations matter more than old ones
+- No retraining, no redeployment — just call `record()` and knowledge grows
+
 ## Storage
 
-Templates are stored as small JSON files (~2–5KB each):
+Templates are stored as small JSON files (~2–5KB each) in the configured `store_path` directory. One file per template.
+
+```
+~/.field_memory/templates/
+├── invoice-vendorA.json          (15 fields, 30 samples)
+├── employment-form.json          (12 fields, 50 samples)
+├── w4-tax-form.json              (11 fields, 20 samples)
+├── cluster_invoice-vendorA.json  (cluster membership tracking)
+└── ...
+```
+
+### Template JSON structure:
 
 ```json
 {
   "template_id": "employment-form",
   "page_count": 1,
-  "sample_count": 10,
+  "sample_count": 50,
+  "created_at": "2024-01-15T10:30:00Z",
+  "updated_at": "2024-06-20T14:22:00Z",
   "fields": {
-    "Employee Name": [{"page": 1, "bbox": {"x": 0.05, "y": 0.10, "width": 0.35, "height": 0.03}, "confidence": 0.95, "occurrence_count": 10}]
+    "Employee Name": [
+      {
+        "page": 1,
+        "bbox": {"x": 0.05, "y": 0.10, "width": 0.35, "height": 0.03},
+        "confidence": 0.97,
+        "occurrence_count": 50
+      }
+    ],
+    "SSN": [
+      {
+        "page": 1,
+        "bbox": {"x": 0.55, "y": 0.10, "width": 0.20, "height": 0.03},
+        "confidence": 0.95,
+        "occurrence_count": 48
+      }
+    ]
   }
 }
 ```
+
+### How data accumulates:
+
+| After N documents | What the library knows |
+|---|---|
+| 1 | Field names and approximate positions (low confidence) |
+| 3-5 | Stable positions, can identify templates (moderate confidence) |
+| 10+ | High-confidence matching, reliable anomaly detection |
+| 50+ | Production-grade stability scores, drift baselines established |
+
+### Persistence behavior:
+
+- **No database required** — plain JSON files, zero dependencies
+- **No network calls** — everything local
+- **Survives restarts** — load `TemplateMemory(store_path=...)` and all prior knowledge is restored
+- **Portable** — copy the JSON files to another machine and the memory transfers
+- **Export/Import** — `memory.export_template("id", fmt="json")` for programmatic transfer
 
 ## Interactive Dashboard
 
@@ -782,6 +941,10 @@ streamlit run dashboard/app.py
 
 # Production mode (point at your existing templates)
 FIELD_MEMORY_STORE=/path/to/your/templates streamlit run dashboard/app.py
+
+# View stress test results in dashboard
+python temp/run_stress_with_dashboard.py   # builds store from Textract output
+FIELD_MEMORY_STORE=benchmarks/output/stress_test_store streamlit run dashboard/app.py
 ```
 
 The dashboard provides 9 interactive views: System Overview, Record Documents, Field Lookup, Identify Template, Template Detail, Field Positions, Drift Analysis, Cluster Membership, and Export/Import.

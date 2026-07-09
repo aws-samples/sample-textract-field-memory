@@ -1,0 +1,90 @@
+# =============================================================================
+# textract-field-memory — Configuration
+# =============================================================================
+#
+# This is the single configuration file for the library.
+# All parameters are listed with their default values.
+# Modify values here to change library behavior globally.
+#
+# Override priority (highest wins):
+#   1. Constructor arguments passed to TemplateMemory()
+#   2. Environment variables (FIELD_MEMORY_*)
+#   3. This file
+#
+# File search order:
+#   1. FIELD_MEMORY_CONFIG env var (explicit path)
+#   2. ./field_memory.yaml (current working directory)
+#   3. ~/.field_memory/config.yaml (user home)
+#
+# =============================================================================
+
+# ─── Storage ─────────────────────────────────────────────────────────────────
+# Directory where template JSON files are persisted.
+# Each template gets its own JSON file in this directory.
+store_path: ~/.field_memory/templates
+
+# ─── Scoring Weights ─────────────────────────────────────────────────────────
+# Controls how much spatial position vs field name similarity matters
+# in template identification and field matching.
+#
+# spatial_weight + name_weight should equal 1.0
+#
+# Use cases:
+#   Fraud/tampering detection → spatial_weight: 0.8, name_weight: 0.2
+#   Noisy scans (OCR jitter)  → spatial_weight: 0.3, name_weight: 0.7
+#   Balanced (default)         → spatial_weight: 0.6, name_weight: 0.4
+spatial_weight: 0.6
+name_weight: 0.4
+
+# ─── Template Identification ─────────────────────────────────────────────────
+# similarity_threshold: Minimum combined score to accept a template match
+# from identify_template(). Documents scoring below this return None.
+#   Low (0.5)  → more matches, higher false positive rate
+#   High (0.8) → fewer matches, higher precision
+similarity_threshold: 0.7
+
+# min_spatial_score: Floor for spatial similarity component.
+# If a document's spatial score is below this, the match is heavily penalized
+# regardless of how well field names match. This prevents accepting documents
+# with correct field names but completely wrong positions (e.g., fraud).
+min_spatial_score: 0.4
+
+# min_structural_score: Floor for structural (Jaccard name overlap) component.
+# If fewer field names overlap than this threshold implies, the match is penalized.
+# Prevents matching when the document has mostly different fields.
+min_structural_score: 0.3
+
+# ─── Spatial Tolerance ───────────────────────────────────────────────────────
+# Position tolerance for "within expected region" checks in locate().
+# A field is considered "within region" if its center falls within the
+# expected bounding box expanded by this fraction of page dimensions.
+#   0.05 = 5% tolerance (~6mm on letter paper)
+#   0.08 = 8% tolerance (~10mm, good for noisy scans)
+#   0.02 = 2% tolerance (~2.5mm, strict)
+spatial_tolerance: 0.05
+
+# ─── Drift Detection ────────────────────────────────────────────────────────
+# drift_threshold: Distance a field center must move (as fraction of page
+# diagonal) to be considered "drifting" relative to the stored baseline.
+#   0.03 = ~4mm on letter paper (detects form revisions)
+#   0.01 = ~1.5mm (very sensitive, may false alarm on scan noise)
+#   0.05 = ~7mm (moderate, good for general use)
+#   0.10 = ~14mm (only catches major layout redesigns)
+drift_threshold: 0.03
+
+# min_drifting_ratio: Fraction of shared fields that must individually
+# exceed drift_threshold before the document is flagged as "drifting."
+# Prevents false alarms from single-field OCR positioning noise.
+#   0.2 = 20% of fields must drift (balanced)
+#   0.0 = any single drifting field triggers (sensitive)
+#   0.5 = half the fields must drift (conservative)
+min_drifting_ratio: 0.2
+
+# ─── Confidence Decay ───────────────────────────────────────────────────────
+# Controls how quickly older positional observations lose influence
+# when computing field region statistics. Applied per new observation.
+#   0.95 = gradual decay (stable templates, slow adaptation)
+#   0.80 = aggressive decay (adapts quickly to recent documents)
+#   1.00 = no decay (all observations weighted equally forever)
+#   0.90 = moderate (good balance of stability and adaptability)
+decay_factor: 0.95

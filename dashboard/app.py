@@ -180,7 +180,7 @@ def get_memory():
             store_path=store_path,
             similarity_threshold=0.5,
             decay_factor=0.95,
-            drift_threshold=0.1,
+            drift_threshold=0.03,
         )
         # Seed with demo data if store is empty
         # Seed with demo data only if using default store and it's empty
