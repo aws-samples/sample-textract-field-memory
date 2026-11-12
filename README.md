@@ -59,7 +59,7 @@ For detailed industry use cases, see [USE_CASES.md](docs/USE_CASES.md).
 
 ---
 
-![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue) ![Tests](https://img.shields.io/badge/tests-158%20passing-green) ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen) ![License](https://img.shields.io/badge/license-MIT--0-blue)
+![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue) ![Tests](https://img.shields.io/badge/tests-158%20passing-green) ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen) ![License](https://img.shields.io/badge/license-MIT--0-blue) [![PyPI](https://img.shields.io/pypi/v/textract-field-memory)](https://pypi.org/project/textract-field-memory/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24150041.svg)](https://doi.org/10.5281/zenodo.24150041)
 
 **Give your document processing pipeline a memory.**
 
@@ -957,6 +957,14 @@ In production mode, it reads directly from your pipeline's template store — no
 pip install -e ".[dev]"
 pytest
 ```
+
+## Citation
+
+If you use this library in research or a publication, please cite it. GitHub's "Cite this repository" button uses [CITATION.cff](CITATION.cff).
+
+> Bansal, A. (2026). *textract-field-memory: spatial field location memory for document processing pipelines* (Version 0.3.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.24150042
+
+The concept DOI [10.5281/zenodo.24150041](https://doi.org/10.5281/zenodo.24150041) always resolves to the latest version.
 
 ## License
 
