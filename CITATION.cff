@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: "textract-field-memory: spatial field location memory for document processing pipelines"
+abstract: >-
+  A zero-dependency Python library that learns where fields appear on recurring
+  document types and uses that spatial memory to validate OCR extractions,
+  identify document types by layout, detect anomalies and template drift, and
+  skip LLM calls when spatial confidence is high.
+authors:
+  - family-names: Bansal
+    given-names: Avneet
+    affiliation: "Amazon Web Services"
+version: 0.3.0
+date-released: 2026-07-09
+license: MIT-0
+doi: 10.5281/zenodo.24150042
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24150041
+    description: "Concept DOI, resolves to the latest version"
+  - type: doi
+    value: 10.5281/zenodo.24150042
+    description: "DOI for this version"
+repository-code: "https://github.com/aws-samples/sample-textract-field-memory"
+keywords:
+  - document processing
+  - OCR
+  - Amazon Textract
+  - spatial memory
+  - template learning
+  - field extraction
+  - anomaly detection
